@@ -10,40 +10,40 @@ public class DetailViewActivity extends Activity {
 
     private EditText nameField, emailField;
     private MyApplicationData appState;
-    Contact receivedPersonInfo;
+    Business receivedBusinessInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_view);
-        receivedPersonInfo = (Contact)getIntent().getSerializableExtra("Contact");
+        receivedBusinessInfo = (Business)getIntent().getSerializableExtra("Business");
         //Get the app wide shared variables
         appState = ((MyApplicationData) getApplicationContext());
 
         nameField = (EditText) findViewById(R.id.name);
         emailField = (EditText) findViewById(R.id.email);
 
-        if(receivedPersonInfo != null){
-            nameField.setText(receivedPersonInfo.name);
-            emailField.setText(receivedPersonInfo.email);
+        if(receivedBusinessInfo != null){
+            nameField.setText(receivedBusinessInfo.name);
+            emailField.setText(receivedBusinessInfo.email);
         }
     }
 
-    public void updateContact(View v){
-        String personID = receivedPersonInfo.uid;
+    public void updateBusiness(View v){
+        String BusinessID = receivedBusinessInfo.uid;
         String newName = nameField.getText().toString();
         String newEmail = emailField.getText().toString();
 
-        Contact updatedPerson = new Contact(personID, newName, newEmail);
+        Business updatedPerson = new Business(BusinessID, newName, newEmail);
 
-        appState.firebaseReference.child(personID).setValue(updatedPerson);
+        appState.firebaseReference.child(BusinessID).setValue(updatedPerson);
         finish();
     }
 
-    public void eraseContact(View v)
+    public void eraseBusiness(View v)
     {
-        String personID = receivedPersonInfo.uid;
-        appState.firebaseReference.child(personID).removeValue();
+        String BusinessID = receivedBusinessInfo.uid;
+        appState.firebaseReference.child(BusinessID).removeValue();
         finish();
     }
 }

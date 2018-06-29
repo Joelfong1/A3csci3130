@@ -6,7 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class CreateContactAcitivity extends Activity {
+/**
+ * Created by Joel Fong on 2018-06-29.
+ */
+
+public class CreateBusinessActivity extends Activity {
 
     private Button submitButton;
     private EditText nameField, emailField;
