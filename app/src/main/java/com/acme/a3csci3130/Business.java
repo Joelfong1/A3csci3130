@@ -27,6 +27,15 @@ public class Business implements Serializable {
         // Default constructor required for calls to DataSnapshot.getValue
     }
 
+    /**
+     * Creates a new business.
+     * @param uid String UID. to identify the business on firebase.
+     * @param businessNum Integer Business number. Must be an int of 9 digits.
+     * @param name String Name. The name of the business up to 48 chars
+     * @param primaryBusiness String primaryBusiness. The business type
+     * @param address String address. The address up to 50 chars
+     * @param province String province. The province
+     */
     public Business(String uid, int businessNum, String name, String primaryBusiness, String address, String province){
         this.uid = uid;
         this.businessNum = businessNum;
@@ -36,6 +45,10 @@ public class Business implements Serializable {
         this.province = province;
     }
 
+    /**
+     * Maps the business to JSON format.
+     * @return this Business's resulting JSON.
+     */
     @Exclude
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
