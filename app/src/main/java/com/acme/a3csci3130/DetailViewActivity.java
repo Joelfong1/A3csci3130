@@ -40,8 +40,10 @@ public class DetailViewActivity extends Activity {
 
         if(receivedBusinessInfo != null){
             nameField.setText(receivedBusinessInfo.name);
-            businessNumberField.setText(receivedBusinessInfo.businessNum);
+            businessNumberField.setText(receivedBusinessInfo.businessNum + "");
             addressField.setText(receivedBusinessInfo.address);
+            businessSpinner.setSelection(adapter.getPosition(receivedBusinessInfo.primaryBusiness));
+            provinceSpinner.setSelection(provinceAdapter.getPosition(receivedBusinessInfo.province));
         }
     }
 

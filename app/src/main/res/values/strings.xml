@@ -6,14 +6,14 @@
     <string name="business_number">Business Number</string>
     <string name="address">Address</string>
     <string-array name="business_type_array">
-        <item> </item>
+        <item>----------------</item>
         <item>Fisher</item>
         <item>Distributor</item>
         <item>Processor</item>
         <item>Fish Monger</item>
     </string-array>
     <string-array name="province_array">
-        <item> </item>
+        <item>----------------</item>
         <item>AB</item>
         <item>BC</item>
         <item>MB</item>
@@ -27,5 +27,6 @@
         <item>QC</item>
         <item>SK</item>
         <item>YT</item>
+        <item> </item>
     </string-array>
 </resources>
