@@ -3,67 +3,47 @@ package com.acme.a3csci3130;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 public class DetailViewActivity extends Activity {
 
-    private EditText nameField, businessNumberField, addressField;
-    private Spinner businessSpinner, provinceSpinner;
+    private EditText nameField, emailField;
     private MyApplicationData appState;
-    Business receivedBusinessInfo;
+    Contact receivedPersonInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_view);
-        receivedBusinessInfo = (Business)getIntent().getSerializableExtra("Business");
+        receivedPersonInfo = (Contact)getIntent().getSerializableExtra("Contact");
         //Get the app wide shared variables
         appState = ((MyApplicationData) getApplicationContext());
 
         nameField = (EditText) findViewById(R.id.name);
-        businessNumberField = (EditText) findViewById(R.id.businessNumber);
-        addressField = (EditText) findViewById(R.id.address);
+        emailField = (EditText) findViewById(R.id.email);
 
-        businessSpinner = (Spinner) findViewById(R.id.businessSpinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.business_type_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        businessSpinner.setAdapter(adapter);
-
-        provinceSpinner = (Spinner) findViewById(R.id.provinceSpinner);
-        ArrayAdapter<CharSequence> provinceAdapter = ArrayAdapter.createFromResource(this,
-                R.array.province_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        provinceSpinner.setAdapter(provinceAdapter);
-
-        if(receivedBusinessInfo != null){
-            nameField.setText(receivedBusinessInfo.name);
-            businessNumberField.setText(receivedBusinessInfo.businessNum + "");
-            addressField.setText(receivedBusinessInfo.address);
-            businessSpinner.setSelection(adapter.getPosition(receivedBusinessInfo.primaryBusiness));
-            provinceSpinner.setSelection(provinceAdapter.getPosition(receivedBusinessInfo.province));
+        if(receivedPersonInfo != null){
+            nameField.setText(receivedPersonInfo.name);
+            emailField.setText(receivedPersonInfo.email);
         }
     }
 
-    public void updateBusiness(View v){
-        String businessID = receivedBusinessInfo.uid;
+    public void updateContact(View v){
+        String personID = receivedPersonInfo.uid;
         String newName = nameField.getText().toString();
-        int newBusinessNumber = Integer.parseInt(businessNumberField.getText().toString());
-        String newBusinessType = businessSpinner.getSelectedItem().toString();
-        String newAddress = addressField.getText().toString();
-        String newProvince = provinceSpinner.getSelectedItem().toString();
-        Business updatedBusiness = new Business(businessID, newBusinessNumber, newName, newBusinessType, newAddress, newProvince);
+        String newEmail = emailField.getText().toString();
 
-        appState.firebaseReference.child(businessID).setValue(updatedBusiness);
+        Contact updatedPerson = new Contact(personID, newName, newEmail);
+
+        appState.firebaseReference.child(personID).setValue(updatedPerson);
         finish();
     }
 
-    public void eraseBusiness(View v)
+    public void eraseContact(View v)
     {
-        String businessID = receivedBusinessInfo.uid;
-        appState.firebaseReference.child(businessID).removeValue();
+        String personID = receivedPersonInfo.uid;
+        appState.firebaseReference.child(personID).removeValue();
         finish();
     }
 }

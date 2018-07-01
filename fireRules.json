@@ -2,24 +2,15 @@
   "rules": {
     ".read": "true",
     ".write": "true",
-    "businesses": {
-      "$business": {
-        "name": {
-          ".validate": "newData.isString() && newData.val().length >= 2 && newData.val().length <= 48"
-        },
-        "businessNumber": {
-          ".validate": "newData.isNumber() && newData.val() == 9"
-        },
-        "businessType": {
-          ".validate": "newData.isString() && newData.val().matches(/Fisher|Distributor|Processor|Fish Monger/)"
-        },
-        "address": {
-          ".validate": "newData.isString() && newData.val().length < 50"
-        },
-        "provinceTerritory": {
-          ".validate": "newData.isString() && newData.val().matches(/AB|BC|MB|NB|NL|NS|NT|NU|ON|PE|QC|SK|YT| |/)"
+    "contacts": {
+            "$contact": {
+                "name": {
+                    ".validate": "newData.isString() && newData.val().length < 50"
+                },
+                "email": {
+                    ".validate": "newData.isString() && newData.val().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$/i)"
+                }
+            }
         }
-      }
-    }
   }
 }
